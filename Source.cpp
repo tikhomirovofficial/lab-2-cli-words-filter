@@ -21,10 +21,7 @@ int main() {
 	cout << endl;
 	beautifulPrint("FILTERED WORDS:");
 
-	printWordsLessThan(str, maxLenOfWord);
-	cout << endl;
-
-	beautifulPrint("THANK YOU");
+	printFilteredWordsByString(str, maxLenOfWord);
 
 	return 0;
 }

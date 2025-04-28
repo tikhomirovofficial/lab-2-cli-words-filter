@@ -1,4 +1,8 @@
-#include "Prints.h";
+#pragma once;
+
+#include <iostream>;
+#include "Prints.h"
+#include "../../3/Program/DynamicIntArrayData.h"
 
 using std::cout;
 using std::cin;
@@ -8,7 +12,7 @@ void printCharsLine(char symbol, short count) {
 	for (int i = 0; i < count; i++) cout << symbol;
 }
 
-void beautifulPrint(const char* message, short countInline, char symbol) {
+void beautifulPrint(const char *message, short countInline, char symbol) {
 	if (!countInline) {
 		cout << message;
 		return;
@@ -19,20 +23,41 @@ void beautifulPrint(const char* message, short countInline, char symbol) {
 	cout << endl;
 }
 
-void printWordsLessThan(char string[], int maxLength) {
-	int wordsCounter = 0;
-	char seps[] = ", ";
-	char* currentWord = strtok(string, seps); // set zero terminator to first delim
+void printNumsArray(DynamicIntArrayData numbersData, int rowLength) {
+	for (int i = 0, positionInLine = 0; i < numbersData.length; i++)
+	{
+		cout << numbersData.arr[i] << " ";
+
+		if (positionInLine == rowLength) {
+			cout << endl << endl;
+			positionInLine = 0;
+		}
+		else positionInLine++;
+	}
+	cout << endl;
+}
+
+void printBorderBottom(int count) {
+	printCharsLine('-', count);
+	cout << endl << endl;
+}
+
+
+void printFilteredWordsByString(char str[], int maxLength, const char delims[]) {
+	char* currentWord = strtok(str, delims);
+	
+	if (currentWord == NULL) {
+		cout << "WORDS WERE NOT FOUND" << endl;
+		return;
+	}
 
 	while (currentWord != NULL) {
 		if (strlen(currentWord) < maxLength) {
-			cout << ++wordsCounter << currentWord << endl;
+			cout << currentWord << endl;
 		}
-		currentWord = strtok(NULL, seps);
+		currentWord = strtok(NULL, delims);
 	}
 
-	if (!wordsCounter) {
-		cout << endl;
-		beautifulPrint("YOUR STRING DOESN'T HAVE SUITABLE WORDS", 3, '*');
-	}
+	cout << endl;
+
 }
