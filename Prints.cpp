@@ -45,17 +45,19 @@ void printBorderBottom(int count) {
 
 void printFilteredWordsByString(char str[], int maxLength, const char delims[]) {
 	char* currentWord = strtok(str, delims);
-	
-	if (currentWord == NULL) {
-		cout << "WORDS WERE NOT FOUND" << endl;
-		return;
-	}
+	int findedWordsCount = 0;
 
 	while (currentWord != NULL) {
 		if (strlen(currentWord) < maxLength) {
 			cout << currentWord << endl;
+			findedWordsCount++;
 		}
 		currentWord = strtok(NULL, delims);
+	}
+
+	if (!findedWordsCount) {
+		cout << "WORDS WERE NOT FOUND" << endl;
+		return;
 	}
 
 	cout << endl;
